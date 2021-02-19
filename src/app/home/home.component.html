@@ -1,7 +1,35 @@
 <div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+  <header>
+    <strong><span>YT</span>Desk</strong>
+    <nav>
+      <ul>
+        <li><img src="../../assets/btn-min.svg" id="min" (click)="minimizedWindow()"></li>
+        <li><img src="../../assets/btn-close.svg" id="close" (click)="closeWindow()"></li>
+      </ul>
+    </nav>
+  </header>
 
-  <a routerLink="/detail">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+  <input type="text" placeholder="Channel Username" value="UCVyRiMvFUNMA1UP1DPzG50w" (keyup.enter)="channel($event.target.value)">
+
+  <main>
+    <!-- ng element allows loop in form *ngFOR="let var of list" -->
+    <ng-container *ngFor="let channel of channelInfo.items">
+      <!-- figure element used to mark up a photo and add a caption -->
+      <figure>
+        <!-- [src] is a property binding (angular feature) that binds value to the component value -->
+        <img [src]="channel.snippet.thumbnails.default.url" alt="">
+        <figcaption>
+          <!-- interpolation displays a value -->
+          {{ channel.snippet.title }}
+        </figcaption>
+      </figure>
+
+      <div class="stats">
+        <!-- (| number) formating for commas in number -->
+        <strong> {{ channel.statistics.subsriberCount | number }}</strong>
+        <span>SUBSCRIBERS</span>
+      </div>
+    </ng-container>
+  </main>
+
 </div>
